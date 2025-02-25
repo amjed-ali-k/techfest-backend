@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from 'hono/cors'
 
 interface Env {
   GOOGLE_CLIENT_EMAIL: string;
@@ -6,7 +7,7 @@ interface Env {
 }
 
 const app = new Hono<{ Bindings: Env }>();
-
+app.use('*', cors())
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
